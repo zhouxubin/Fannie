@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>正在打开番茄畅听...</title>
+  <title>正在打开起点读书...</title>
   <style>
     body {
       margin: 0;
@@ -37,7 +37,7 @@
 <body>
   <div class="loading">
     <div class="spinner"></div>
-    <p>正在启动番茄畅听…</p>
+    <p>正在启动起点读书…</p>
     <p style="font-size:12px;color:#999;">若未安装，即将跳转下载</p>
   </div>
 
@@ -45,7 +45,7 @@
     // 确保只在 Android 设备上执行
     if (/Android/i.test(navigator.userAgent)) {
       // 构造 Intent URL（通过包名唤起 App）
-      const intentUrl = 'intent://#Intent;package=com.xs.fm;end;';
+      String intentUri = "intent://scan/#Intent;scheme=qidian://home;package=com.qidian.QDReader;end";
       
       // 尝试立即唤起 App
       window.location.href = intentUrl;
