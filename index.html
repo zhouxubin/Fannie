@@ -1,62 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>正在打开起点读书...</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: sans-serif;
-    }
-    .loading {
-      text-align: center;
-      color: #666;
-    }
-    .spinner {
-      width: 32px;
-      height: 32px;
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #ff6b35;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 16px;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
+  <title>打开起点读书</title>
 </head>
 <body>
-  <div class="loading">
-    <div class="spinner"></div>
-    <p>正在启动起点读书…</p>
-    <p style="font-size:12px;color:#999;">若未安装，即将跳转下载</p>
-  </div>
-
   <script>
-    // 确保只在 Android 设备上执行
     if (/Android/i.test(navigator.userAgent)) {
-      // 构造 Intent URL（通过包名唤起 App）
-      String intentUri = "intent://scan/#Intent;scheme=qidian://home;package=com.qidian.QDReader;end";
-      
-      // 尝试立即唤起 App
-      window.location.href = intentUrl;
+      // 使用 Deep Link 打开起点首页
+      window.location.href = 'qidian://home';
 
-      // 如果 1.5 秒内未打开（即未安装），跳转到应用宝下载页
+      // 若 1.5 秒未打开（未安装），跳转应用宝
       setTimeout(() => {
-        window.location.href = 'https://sj.qq.com/myapp/detail.htm?apkName=com.xs.fm';
-      }, 1500);
+        window.location.href = 'https://sj.qq.com/myapp/detail.htm?apkName=com.qidian.QDReader';
+      }, 2500);
     } else {
-      // 非 Android 设备（理论上不会触发，但做兜底）
-      document.querySelector('.loading').innerHTML = '<p>请在安卓手机上打开此页面</p>';
+      alert('请在安卓手机中打开');
     }
   </script>
 </body>
