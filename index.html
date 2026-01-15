@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>番茄畅听 - 免费听书听广播</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #fff;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      background: #f0f0f0;
+      border-radius: 20px;
+      margin: 30px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      color: #e74c3c;
+    }
+    h1 {
+      font-size: 24px;
+      margin: 15px 0;
+    }
+    p {
+      color: #666;
+      font-size: 16px;
+      margin: 10px 0 25px;
+    }
+    .btn {
+      display: block;
+      width: 90%;
+      max-width: 300px;
+      margin: 20px auto;
+      padding: 14px;
+      background: #ff6b35;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(255,107,53,0.3);
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+    .stores {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #999;
+    }
+    .stores a {
+      color: #ff6b35;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">🎧</div>
+    <h1>番茄畅听</h1>
+    <p>免费听书、听小说、听广播电台<br>海量内容，离线畅听，省流量更省心！</p>
+
+    <!-- 主下载按钮：优先跳转系统应用商店 -->
+    <a href="market://details?id=com.xs.fm" class="btn" id="downloadBtn">立即安装</a>
+
+    <div class="stores">
+      或在应用商店搜索：<br>
+      <a href="https://app.mi.com/details?id=com.xs.fm" target="_blank">小米</a> |
+      <a href="https://sj.qq.com/myapp/detail.htm?apkName=com.xs.fm" target="_blank">应用宝</a> |
+      <a href="https://appgallery.huawei.com/#/app/C104738256" target="_blank">华为</a>
+    </div>
+  </div>
+
+  <script>
+    // 如果 market:// 协议失败（如在微信/QQ内），自动 fallback 到网页商店
+    document.getElementById('downloadBtn').addEventListener('click', function(e) {
+      const startTime = Date.now();
+      window.addEventListener('blur', () => {
+        if (Date.now() - startTime < 200) {
+          // 可能未成功跳转，尝试打开网页版
+          setTimeout(() => {
+            if (!document.hidden) {
+              window.location.href = 'https://sj.qq.com/myapp/detail.htm?apkName=com.xs.fm';
+            }
+          }, 500);
+        }
+      });
+
+      // 部分浏览器不支持 market://，直接跳转应用宝作为备选
+      setTimeout(() => {
+        if (document.visibilityState === 'visible') {
+          window.location.href = 'https://sj.qq.com/myapp/detail.htm?apkName=com.xs.fm';
+        }
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
